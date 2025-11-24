@@ -1,3 +1,5 @@
+ **AI Company Research Assistant**
+
 The **AI Company Research Assistant** is a streamlined, enterprise-focused intelligence system designed to conduct **real-time company research** using multiple live data sources including **Yahoo Finance**, **Google News**, **Wikipedia**, and **Gemini AI**.  
 
 It generates a **professional Account Plan**, updates specific sections via user input, and supports conversational interactions — all through a clean and intuitive Streamlit interface.
@@ -34,71 +36,71 @@ If a query is related to business or analysis (but not a company name), it respo
 
 ### Project Folder Structure
 AI_Assistant/
-│── app.py # Main Streamlit Application
+│── app.py                     # Main Streamlit Application
 │
-├── core/
-│ ├── llm_client.py # Gemini API wrapper
-│ ├── ticker_service.py # Yahoo Search ticker finder
-│ ├── yahoo_service.py # Yahoo Finance extractor
-│ ├── news_service.py # Google News RSS fetcher
-│ ├── wiki_service.py # Wikipedia data scraper
-│ └── research_engine.py # Orchestrates all services
+│── core/
+│   │── llm_client.py          # Gemini API wrapper
+│   │── ticker_service.py      # Yahoo Search ticker finder
+│   │── yahoo_service.py       # Yahoo Finance extractor
+│   │── news_service.py        # Google News RSS fetcher
+│   │── wiki_service.py        # Wikipedia data scraper
+│   │── research_engine.py     # Orchestrates all services
 │
-├── plan/
-│ ├── plan_generator.py # Multi-section account plan generator
-│ └── plan_updater.py # Section updater module
+│── plan/
+│   │── plan_generator.py      # Multi-section account plan generator
+│   │── plan_updater.py        # Section updater module
 │
-├── ui/
-│ ├── layout.py # Header, chat, sidebar layout
-│ ├── theme.py # Global UI theming
-│ └── components.py # Buttons, input etc.
+│── ui/
+│   │── layout.py              # Header, chat, sidebar layout
+│   │── theme.py               # Global UI theming
+│   │── components.py          # Buttons, input box, reusable UI parts
+│   │── assets/
+│       │── bot_avatar.png     # Assistant avatar
 │
-├── utils/
-│ ├── logger.py # Debug logging
-│ └── text_cleaner.py # Cleaning & formatting utilities
+│── utils/
+│   │── logger.py              # Debug logging
+│   │── text_cleaner.py        # Cleaning & formatting utilities
 │
-├── config/
-│ └── keys.env # GEMINI_API_KEY stored here
-│
-├── ui/assets/
-│ └── bot_avatar.png # Assistant avatar
+│── config/
+│   │── keys.env               # GEMINI_API_KEY stored here
+
 
 ### System Architecture
 
-        ┌────────────────────────┐
-        │     User Interface     │
-        │   (Streamlit Frontend) │
-        └─────────────┬──────────┘
-                      │
-                      ▼
-        ┌────────────────────────┐
-        │     Research Engine    │
-        │  (core/research_engine)│
-        └──────┬────────┬────────┘
-               │        │
-    ┌──────────┘        └──────────────┐
-    ▼                                   ▼
-┌──────────────┐              ┌────────────────┐
-│ TickerFinder │              │ WikiFetcher    │
-│ Yahoo Search │              │ Wikipedia API  │
-└───────┬──────┘              └───────┬────────┘
-        │                             │
-        ▼                             ▼
-┌──────────────┐               ┌──────────────────┐
-│ Yahoo Finance│               │ Google News RSS  │
-│ Company Data │               │ Latest Headlines │
-└───────┬──────┘               └───────┬──────────┘
-        │                              │
-        └──────────────────┬───────────┘
+       ┌────────────────────────────────────────────────────────┐
+│                    User Interface                       │
+│                (Streamlit Frontend)                     │
+└────────────────────────────────────────────────────────┘
+                           │
                            ▼
-              ┌────────────────────┐
-              │ Gemini LLM         │
-              │ Plan Generation    │
-              └─────────┬──────────┘
-                        ▼
-               ┌────────────────────┐
-               │ Account Plan (8)   │
-               └────────────────────┘
+┌────────────────────────────────────────────────────────┐
+│                    Research Engine                      │
+│               (core/research_engine.py)                 │
+└────────────────────────────────────────────────────────┘
+           │                         │
+           ▼                         ▼
+ ┌─────────────────┐        ┌────────────────────┐
+ │   TickerFinder   │        │    WikiFetcher     │
+ │ (Yahoo Ticker)   │        │ (Wikipedia API)    │
+ └─────────────────┘        └────────────────────┘
+           │                         │
+           ▼                         ▼
+ ┌─────────────────┐        ┌────────────────────┐
+ │  Yahoo Search    │        │ Google News RSS    │
+ │ (Company Data)   │        │ Latest Headlines   │
+ └─────────────────┘        └────────────────────┘
+           │                         │
+           └──────────────┬──────────┘
+                          ▼
+                ┌────────────────────┐
+                │     Gemini LLM     │
+                │ (Plan Generation)  │
+                └────────────────────┘
+                          ▼
+                ┌────────────────────┐
+                │  Account Plan (8)  │
+                └────────────────────┘
+
 
 
 #  Data Flow Overview
