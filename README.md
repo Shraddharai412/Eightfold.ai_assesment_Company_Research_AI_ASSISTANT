@@ -35,6 +35,7 @@ Rejects non-business or unrelated questions gracefully:
 If a query is related to business or analysis (but not a company name), it responds using the Gemini model.
 
 ### Project Folder Structure
+```
 AI_Assistant/
 │── app.py                     # Main Streamlit Application
 │
@@ -63,11 +64,12 @@ AI_Assistant/
 │
 │── config/
 │   │── keys.env               # GEMINI_API_KEY stored here
+```
 
 
 ### System Architecture
-
-       ┌────────────────────────────────────────────────────────┐
+```
+┌────────────────────────────────────────────────────────┐
 │                    User Interface                       │
 │                (Streamlit Frontend)                     │
 └────────────────────────────────────────────────────────┘
@@ -100,11 +102,12 @@ AI_Assistant/
                 ┌────────────────────┐
                 │  Account Plan (8)  │
                 └────────────────────┘
+```
 
 
 
 #  Data Flow Overview
-
+```
 User Input
 │
 ▼
@@ -124,6 +127,7 @@ Rendered in Sidebar
 │
 ▼
 User updates → PlanUpdater
+```
 
 
 
